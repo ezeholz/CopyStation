@@ -67,6 +67,7 @@ class Log {
 void saveimg() {
   pos.beginDraw();
   cam();
+  
   pos.tint(255,255);
   pos.image(video, 0, 0, width, height);
   pos.endDraw();

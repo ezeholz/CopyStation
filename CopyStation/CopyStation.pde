@@ -7,7 +7,7 @@ boolean next = false;
 PImage image;
 PImage marca;
 
-int img = 0;
+int img = 1;
 int est = (hour() * 10000) + (minute() * 100) + second();
 
 Log log;
@@ -24,7 +24,7 @@ void setup() {
   video.start();
   background(0);
   
-  log= new Log("/Posiciones/","Base.jpg",false, false);
+  log= new Log("/Base/","Base.jpg",false, false);
   cant = log.id;
   
   marca = loadImage("Puerta.png", "png");
@@ -47,7 +47,7 @@ void draw() {
     cam();
   } 
   if (img < cant) {
-    image = loadImage("Estaciones/Base " + est + "/Base " + img + ".jpg");
+    image = loadImage("/Base/Base" + img + ".jpg");
     tint(255,126);
     image(image, 0, 0, width, height);
   }
@@ -55,12 +55,13 @@ void draw() {
 
 void keyPressed() {
   if(key == ' ') {
-    cam();
-    save("Estaciones/Estación " + est + "/Imagen " + img + ".jpg");
-    gif.setDelay(100);
-    gif.addFrame();
-    img++;
-    
+    if(img != cant-1) {
+      cam();
+      save("Estaciones/Estación " + est + "/Imagen " + img + ".jpg");
+      gif.setDelay(100);
+      gif.addFrame();
+      img++;
+    } 
   } else if (key == ENTER) {
     cam();
     gif.finish();
