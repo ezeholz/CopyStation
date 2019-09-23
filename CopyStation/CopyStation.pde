@@ -61,7 +61,14 @@ void keyPressed() {
       gif.setDelay(100);
       gif.addFrame();
       img++;
-    } 
+    } else {
+      cam();
+      gif.finish();
+      est = (hour() * 10000) + (minute() * 100) + second();
+      img = 0;
+      gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
+      gif.setRepeat(0);
+    }
   } else if (key == ENTER) {
     cam();
     gif.finish();
