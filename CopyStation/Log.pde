@@ -38,7 +38,7 @@ class Log {
   }
   
   private void rename() {
-    String newName=(split(fileName, ".")[0]+str(id)+"."+split(fileName, ".")[1]);
+    String newName=(split(fileName, "(")[0]+"("+str(id)+")."+split(fileName, ".")[1]);
     if (exist(newName)) {
       id++;
       rename();
@@ -63,13 +63,16 @@ class Log {
   }
   
 }
-
+/*
 void saveimg() {
   pos.beginDraw();
-  cam();
-  
-  pos.tint(255,255);
+  Capture video2 = new Capture(this, width, height);
+  pos.video2.read();
+  pos.tint(255);
   pos.image(video, 0, 0, width, height);
+  pos.image(marca, width - 200, height - 80, 200, 80);
+  save("Estaciones/Estación " + est + "/Imagen " + img + ".jpg");
+  gif.setDelay(100);
+  gif.addFrame();
   pos.endDraw();
-  next = true;
-}
+}*/

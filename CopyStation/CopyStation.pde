@@ -1,3 +1,12 @@
+/*
+
+640 x 480 imagenes capturadas
+
+menos frames posibles
+buscar forma de gif/boomerang
+
+*/
+
 import processing.video.*;
 import gifAnimation.*;
 
@@ -24,7 +33,7 @@ void setup() {
   video.start();
   background(0);
   
-  log= new Log("/Base/","Base.jpg",false, false);
+  log= new Log("/Base/","Base (1).jpg",false, false);
   cant = log.id;
   
   marca = loadImage("Puerta.png", "png");
@@ -47,7 +56,7 @@ void draw() {
     cam();
   } 
   if (img < cant) {
-    image = loadImage("/Base/Base" + img + ".jpg");
+    image = loadImage("/Base/Base (" + img + ").jpg");
     tint(255,126);
     image(image, 0, 0, width, height);
   }
@@ -65,15 +74,16 @@ void keyPressed() {
       cam();
       gif.finish();
       est = (hour() * 10000) + (minute() * 100) + second();
-      img = 0;
+      img = 1;
       gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
       gif.setRepeat(0);
+      print("Secuencia terminada, iniciando nueva.");
     }
   } else if (key == ENTER) {
     cam();
     gif.finish();
     est = (hour() * 10000) + (minute() * 100) + second();
-    img = 0;
+    img = 1;
     gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
     gif.setRepeat(0);
   }
