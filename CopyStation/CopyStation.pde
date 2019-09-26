@@ -10,8 +10,8 @@ buscar forma de gif/boomerang
 import processing.video.*;
 import gifAnimation.*;
 
-PGraphics pos;
-boolean next = false;
+boolean mirror = true;
+int camaraSelected = 0;
 
 PImage image;
 PImage marca;
@@ -23,13 +23,15 @@ Log log;
 int cant;
 
 GifMaker gif;
-Gif gifs;
 
 Capture video;
 
 void setup() {
   size(640,480);
-  video = new Capture(this, width, height);
+  if(true) {
+    String[] cameras = Capture.list();
+    try {video = new Capture(this, width, height, cameras[camaraSelected]);} catch(Exception e) {video = new Capture(this, width, height);}
+  }
   video.start();
   background(0);
   
@@ -41,13 +43,14 @@ void setup() {
   gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
   gif.setRepeat(0);
 
-  
 }
 
 void cam() {
   video.read();
   tint(255);
-  image(video, 0, 0, width, height);
+  if(mirror) {scale(-1,1);}
+  image(video, -width, 0);
+  if(mirror) {scale(-1,1);}
   image(marca, width - 200, height - 80, 200, 80);
 }
 
