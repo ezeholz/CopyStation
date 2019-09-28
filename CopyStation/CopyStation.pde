@@ -28,10 +28,7 @@ Capture video;
 
 void setup() {
   size(640,480);
-  if(true) {
-    String[] cameras = Capture.list();
-    try {video = new Capture(this, width, height, cameras[camaraSelected]);} catch(Exception e) {video = new Capture(this, width, height);}
-  }
+  video = new Capture(this, 640, 480, AvalCam()[camaraSelected], 30);
   video.start();
   background(0);
   
@@ -48,9 +45,13 @@ void setup() {
 void cam() {
   video.read();
   tint(255);
-  if(mirror) {scale(-1,1);}
-  image(video, -width, 0);
-  if(mirror) {scale(-1,1);}
+  if(mirror) {
+    scale(-1,1);
+    image(video, -width, 0);
+    scale(-1,1);
+  } else {
+    image(video, 0, 0);
+  }
   image(marca, width - 200, height - 80, 200, 80);
 }
 
@@ -90,4 +91,20 @@ void keyPressed() {
     gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
     gif.setRepeat(0);
   }
+}
+
+String[] AvalCam() {
+  StringList listName = new StringList();
+  for (int i = 0; i < Capture.list().length; i++) {
+    if(i==0){
+      listName.append(split(split(Capture.list()[i],',')[0],'=')[1]);
+    } else {
+      if(!listName.hasValue(split(split(Capture.list()[i],',')[0],'=')[1])) {
+        listName.append(split(split(Capture.list()[i],',')[0],'=')[1]);
+      }
+    }
+  }
+  println("Available Cameras: ");
+  println(listName);
+  return listName.array();
 }
