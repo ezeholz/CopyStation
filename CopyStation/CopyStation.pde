@@ -58,9 +58,8 @@ void cam() {
 void draw() { 
   if (video.available()) {
     cam();
-  } 
+  }
   if (img < cant) {
-    image = loadImage("/Base/Base (" + img + ").jpg");
     tint(255,126);
     image(image, 0, 0, width, height);
   }
@@ -74,6 +73,7 @@ void keyPressed() {
       gif.setDelay(100);
       gif.addFrame();
       img++;
+      image = loadImage("/Base/Base (" + img + ").jpg");
     } else {
       cam();
       gif.finish();
@@ -82,6 +82,7 @@ void keyPressed() {
       gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
       gif.setRepeat(0);
       print("Secuencia terminada, iniciando nueva.");
+      image = loadImage("/Base/Base (" + img + ").jpg");
     }
   } else if (key == ENTER) {
     cam();
@@ -90,6 +91,7 @@ void keyPressed() {
     img = 1;
     gif = new GifMaker(this, "Estaciones/Estación " + est + "/#Gif.gif");
     gif.setRepeat(0);
+    image = loadImage("/Base/Base (" + img + ").jpg");
   }
 }
 
